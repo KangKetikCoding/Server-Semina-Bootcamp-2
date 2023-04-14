@@ -10,7 +10,7 @@
     "ecmaVersion": "latest"
   },
   "rules": {
-    "no-console": "off",
-    "import/noextraneous-dependencies": "off"
+    "no-console": "off"
+    // "import/noextraneous-dependencies": "off"
   }
 }
