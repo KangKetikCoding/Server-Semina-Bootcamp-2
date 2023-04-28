@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const { model, Schema } = mongoose;
 
 const categorySchema = Schema(
@@ -10,7 +11,7 @@ const categorySchema = Schema(
       required: [true, 'name Must be filled'],
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 module.exports = model('Category', categorySchema);

@@ -1,8 +1,9 @@
 const { StatusCodes } = require('http-status-codes');
-const errorHandlerMiddleware = (err, req, res, next) => {
-  let customError = {
+
+const errorHandlerMiddleware = (err, req, res) => {
+  const customError = {
     statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
-    msg: err.message || 'Something went wrong with your server!! Fix it now!'
+    msg: err.message || 'Something went wrong with your server!! Fix it now!',
   };
   if (err.name === 'ValidationError') {
     customError.msg = Object.values(err.errors)
@@ -19,8 +20,8 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     customError.statusCode = 404;
   }
   return res.status(customError.statusCode).json({
-    msg: customError.msg
-  })
-}
+    msg: customError.msg,
+  });
+};
 
 module.exports = errorHandlerMiddleware;

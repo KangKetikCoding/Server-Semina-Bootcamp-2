@@ -6,4 +6,4 @@ module.exports = {
   CustomAPIError,
   NotFoundError,
   BadRequestError,
-}
+};

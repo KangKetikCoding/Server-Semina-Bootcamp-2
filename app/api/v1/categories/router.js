@@ -1,5 +1,12 @@
 const express = require('express');
-const { create, index, find, update, destroy } = require('./controller');
+const {
+  create,
+  index,
+  find,
+  update,
+  destroy,
+} = require('./controller');
+
 const router = express();
 
 router.get('/categories', index);
