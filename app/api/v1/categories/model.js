@@ -6,12 +6,11 @@ const categorySchema = Schema(
   {
     name: {
       type: String,
-      minlength: [3, 'Length of name must equals more than 3 characters'],
-      maxLength: [20, 'Length of name cant more than 20 characters'],
-      required: [true, 'name Must be filled'],
+      minlength: [3, 'Panjang nama kategori minimal 3 karakter'],
+      maxLength: [20, 'Panjang nama kategori maksimal 20 karakter'],
+      required: [true, 'Nama kategori harus diisi'],
     },
   },
   { timestamps: true },
 );
-
 module.exports = model('Category', categorySchema);
