@@ -1,4 +1,5 @@
 const Talents = require('../../api/v1/talents/model');
+
 const { checkingImage } = require('./images');
 const { NotFoundError, BadRequestError } = require('../../errors');
 
@@ -21,7 +22,7 @@ const createTalents = async (req) => {
   const { name, role, image } = req.body;
   await checkingImage(image);
   const check = await Talents.findOne({ name });
-  if (check) throw new BadRequestError('pembicara nama duplikat');
+  if (check) throw new BadRequestError('Talents name has been registered');
   const result = await Talents.create({ name, image, role });
   return result;
 };
@@ -35,7 +36,7 @@ const getOneTalents = async (req) => {
     })
     .select('_id name role image');
   if (!result) {
-    throw new NotFoundError(`Tidak ada pembicara dengan id :  ${id}`);
+    throw new NotFoundError(`No talents with ID :  ${id}`);
   }
   return result;
 };
@@ -48,14 +49,14 @@ const updateTalents = async (req) => {
     name,
     _id: { $ne: id },
   });
-  if (check) throw new BadRequestError('pembicara nama duplikat');
+  if (check) throw new BadRequestError('Talents name has been registered');
 
   const result = await Talents.findOneAndUpdate(
     { _id: id },
     { name, image, role },
     { new: true, runValidators: true },
   );
-  if (!result) { throw new NotFoundError(`Tidak ada pembicara dengan id :  ${id}`); }
+  if (!result) { throw new NotFoundError(`No talents with ID :  ${id}`); }
   return result;
 };
 
@@ -65,7 +66,7 @@ const deleteTalents = async (req) => {
     _id: id,
   });
   if (!result) {
-    throw new NotFoundError(`Tidak ada pembicara dengan id :  ${id}`);
+    throw new NotFoundError(`No talents with ID :  ${id}`);
   }
   await result.remove();
   return result;
@@ -74,7 +75,7 @@ const deleteTalents = async (req) => {
 const checkingTalents = async (id) => {
   const result = await Talents.findOne({ _id: id });
   if (!result) {
-    throw new NotFoundError(`Tidak ada pembicara dengan id :  ${id}`);
+    throw new NotFoundError(`No talents with ID :  ${id}`);
   }
   return result;
 };
